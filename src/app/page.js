@@ -18,7 +18,7 @@ const Home = () => {
           <p>Discover the powerful tools and resources available on Career Mentor Hub</p>
           <p>designed to accelerate your professional growth.</p>
         </section>
-<div className="w-11/12">
+        <div className="w-11/12">
             <CodeBlocks
               position={"lg:flex-row"}
               heading={
@@ -77,9 +77,9 @@ const Home = () => {
 
           </section>
 
-          {/*  Footer */}
-          <Footer />
         </div>
+        {/*  Footer */}
+        <Footer />
     </div>
   );
 };

@@ -79,11 +79,11 @@ export function signUp(
       }
 
       toast.success("Signup Successful")
-      dispatch(login(email, password, navigate))
+      dispatch(login(email, password, router))
     } catch (error) {
       console.log("SIGNUP API ERROR............", error)
       toast.error("Signup Failed")
-      navigate("/signup")
+      router.push("/signup")
     } finally {
       // dispatch(setLoading(false))
       toast.dismiss(toastId)
@@ -94,7 +94,7 @@ export function signUp(
 // export function login(
 //   email,
 //   password,
-//   navigate
+//   router
 // ) {
 //   return async (dispatch) => {
 //     console.log("Inside login :", email, password)
@@ -113,7 +113,7 @@ export function signUp(
 //       if (!response.success) {
 //         toast.error(response.message);
 //         if(response.status === HTTP_STATUS_CODE.NotFound)
-//           navigate("/signup")
+//           router.push("/signup")
 //         return;
 //       }
 //
@@ -124,7 +124,7 @@ export function signUp(
 //
 //       dispatch(setUser({ ...response.user, image: userImage }))
 //       localStorage.setItem("token", JSON.stringify(response.token))
-//       navigate("/dashboard/my-profile")
+//       router.push("/dashboard/my-profile")
 //     } catch (error) {
 //       console.log("LOGIN API ERROR............", error)
 //       toast.error("Login Failed")
@@ -170,7 +170,7 @@ export function resetPassword(
   password, 
   confirmPassword, 
   token, 
-  navigate
+  router
 ) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
@@ -190,7 +190,7 @@ export function resetPassword(
       }
 
       toast.success("Password Reset Successfully")
-      navigate("/login")
+      router.push("/login")
     } catch (error) {
       console.log("RESETPASSWORD ERROR............", error)
       toast.error("Failed To Reset Password")
@@ -201,7 +201,7 @@ export function resetPassword(
   }
 }
 
-export function logout(navigate) {
+export function logout(router) {
   return (dispatch) => {
     dispatch(setToken(null))
     dispatch(setUser(null))
@@ -209,6 +209,6 @@ export function logout(navigate) {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     toast.success("Logged Out")
-    navigate("/")
+    router.push("/")
   }
 }
