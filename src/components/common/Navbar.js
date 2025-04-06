@@ -39,7 +39,14 @@ const Navbar = () => {
             </li>
           ))}
           <li className="h-9 px-3 flex items-center justify-center font-montserrat text-sm leading-6 font-normal text-white bg-[#171A1F] opacity-100 rounded-full hover:bg-[#262A33] active:bg-[#323842] disabled:opacity-40">
-            <button>Sign In</button>
+            <Link href="/login">
+              <button >Log In</button>
+            </Link>
+          </li>
+          <li className="h-9 px-3 flex items-center justify-center font-montserrat text-sm leading-6 font-normal text-white bg-[#171A1F] opacity-100 rounded-full hover:bg-[#262A33] active:bg-[#323842] disabled:opacity-40">
+            <Link href="/signup">
+              <button >Sign In</button>
+            </Link>
           </li>
         </ul>
       </nav>

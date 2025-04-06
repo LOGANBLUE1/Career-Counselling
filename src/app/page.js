@@ -1,6 +1,7 @@
 "use client";
 import HighlightText from "@/components/core/homepage/HighlightText";
 import CodeBlocks from "@/components/core/homepage/CodeBlocks";
+import Footer from "@/components/common/Footer"
 import Image from "next/image";
 
 const Home = () => {
@@ -77,9 +78,7 @@ const Home = () => {
           </section>
 
           {/*  Footer */}
-          <section>
-
-          </section>
+          <Footer />
         </div>
     </div>
   );
