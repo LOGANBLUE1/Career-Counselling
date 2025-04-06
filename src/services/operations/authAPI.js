@@ -79,7 +79,6 @@ export function signUp(
       }
 
       toast.success("Signup Successful")
-      dispatch(login(email, password, router))
     } catch (error) {
       console.log("SIGNUP API ERROR............", error)
       toast.error("Signup Failed")

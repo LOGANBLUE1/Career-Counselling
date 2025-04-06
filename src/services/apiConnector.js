@@ -25,7 +25,7 @@ export const apiConnector = async (method, url, bodyData = null, headers = {}, p
     url += queryString;
 
     // Make the fetch request
-    const response = await fetch(process.env.REACT_APP_BASE_URL + url, options);
+    const response = await fetch("http://localhost:4000/api/v1" + url, options);
 
     let data;
     const contentType = response.headers.get("content-type");

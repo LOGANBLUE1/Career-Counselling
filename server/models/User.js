@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 const Profile = require('./Profile');
-const CourseProgress = require('./CourseProgress');
-const RatingAndReview = require('./RatingandReview');
-const Course = require('./Course');
+// const CourseProgress = require('./CourseProgress');
+// const RatingAndReview = require('./RatingandReview');
+// const Course = require('./Course');
 
 const userSchema = new mongoose.Schema(
   {
@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      lowercase: true,
     },
     loginType: {
       type: String,
@@ -37,11 +38,11 @@ const userSchema = new mongoose.Schema(
         return this.loginType === 'Direct';
       }
     },
-    accountType: {
-      type: String,
-      enum: ["Admin", "Student", "Instructor"],
-      default: "Student",
-    },
+    // accountType: {
+    //   type: String,
+    //   enum: ["Admin", "Student", "Instructor"],
+    //   default: "Student",
+    // },
     active: {                          //disable it instead of deleting account
       type: Boolean,
       default: true,
@@ -52,15 +53,15 @@ const userSchema = new mongoose.Schema(
     },
     additionalDetails: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      // required: true,
       ref: "Profile",
     },
-    courses: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Course",
-      },
-    ],
+    // courses: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Course",
+    //   },
+    // ],
     token: {    // for reset password                       
       type: String,
     },
@@ -70,12 +71,12 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    courseProgress: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "courseProgress",
-      },
-    ],
+    // courseProgress: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "courseProgress",
+    //   },
+    // ],
     // Add timestamps for when the document is created and last modified
   },
   { timestamps: true }
@@ -88,15 +89,15 @@ userSchema.pre('findOneAndDelete', async function (next) {
     if (user) {
       await Profile.findByIdAndDelete(user.additionalDetails);
 
-      await CourseProgress.deleteMany({ userId: user._id });
+      // await CourseProgress.deleteMany({ userId: user._id });
 
-      await RatingAndReview.deleteMany({ user: user._id });
+      // await RatingAndReview.deleteMany({ user: user._id });
 
-      // Update courses by removing the user from studentsEnrolled
-      await Course.updateMany(
-        { studentsEnrolled: user._id },
-        { $pull: { studentsEnrolled: user._id } }
-      );
+      // // Update courses by removing the user from studentsEnrolled
+      // await Course.updateMany(
+      //   { studentsEnrolled: user._id },
+      //   { $pull: { studentsEnrolled: user._id } }
+      // );
     }
     next();
   } catch (err) {

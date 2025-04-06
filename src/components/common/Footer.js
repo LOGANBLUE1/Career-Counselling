@@ -1,9 +1,6 @@
 import React from "react";
 import { FooterLink2 } from "@/data/footer-links";
 
-// Images
-
-// Icons
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 

@@ -5,6 +5,7 @@ import Navbar from "@/components/common/Navbar";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import "./globals.css";
+import {Toaster} from "react-hot-toast";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
                 <Navbar />
                 <main>{children}</main>
             </div>
+            <Toaster/>
         </Provider>
         </body>
         </html>

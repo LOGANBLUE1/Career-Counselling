@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const { ACCOUNT_TYPE } = require("../utils/constants");
+// const { ACCOUNT_TYPE } = require("../utils/constants");
 require("dotenv").config();
 
 // This function is used as middleware to authenticate user requests
@@ -45,81 +45,81 @@ exports.auth = async (req, res, next) => {
 };
 
 
-exports.isStudent = async (req, res, next) => {
-	try {
-		const userDetails = await User.findOne({ email: req.user.email });
+// exports.isStudent = async (req, res, next) => {
+// 	try {
+// 		const userDetails = await User.findOne({ email: req.user.email });
 
-		if (userDetails.accountType !== ACCOUNT_TYPE.STUDENT) {
-			return res.status(401).json({
-				success: false,
-				message: "This is a Protected Route for Students",
-			});
-		}
-		next();
-	} catch (error) {
-		return res.status(500).json({ 
-			success: false, 
-			message: `User Role Can't be Verified` 
-		});
-	}
-};
+// 		if (userDetails.accountType !== ACCOUNT_TYPE.STUDENT) {
+// 			return res.status(401).json({
+// 				success: false,
+// 				message: "This is a Protected Route for Students",
+// 			});
+// 		}
+// 		next();
+// 	} catch (error) {
+// 		return res.status(500).json({ 
+// 			success: false, 
+// 			message: `User Role Can't be Verified` 
+// 		});
+// 	}
+// };
 
-exports.isAdmin = async (req, res, next) => {
-	try {
-		const userDetails = await User.findOne({ email: req.user.email });
+// exports.isAdmin = async (req, res, next) => {
+// 	try {
+// 		const userDetails = await User.findOne({ email: req.user.email });
 
-		if (userDetails.accountType !== ACCOUNT_TYPE.ADMIN) {
-			return res.status(401).json({
-				success: false,
-				message: "This is a Protected Route for Admin",
-			});
-		}
-		next();
-	} catch (error) {
-		return res.status(500).json({ 
-			success: false, 
-			message: `User Role Can't be Verified` 
-		});
-	}
-};
+// 		if (userDetails.accountType !== ACCOUNT_TYPE.ADMIN) {
+// 			return res.status(401).json({
+// 				success: false,
+// 				message: "This is a Protected Route for Admin",
+// 			});
+// 		}
+// 		next();
+// 	} catch (error) {
+// 		return res.status(500).json({ 
+// 			success: false, 
+// 			message: `User Role Can't be Verified` 
+// 		});
+// 	}
+// };
 
-exports.isInstructor = async (req, res, next) => {
-	try {
-		const userDetails = await User.findOne({ email: req.user.email });
-		// console.log("isInstructor: ",userDetails);
+// exports.isInstructor = async (req, res, next) => {
+// 	try {
+// 		const userDetails = await User.findOne({ email: req.user.email });
+// 		// console.log("isInstructor: ",userDetails);
 
-		// console.log("Account type: "userDetails.accountType);
+// 		// console.log("Account type: "userDetails.accountType);
 
-		if (userDetails.accountType !== ACCOUNT_TYPE.INSTRUCTOR) {
-			return res.status(401).json({
-				success: false,
-				message: "This is a Protected Route for Instructor",
-			});
-		}
-		next();
-	} catch (error) {
-		return res.status(500).json({ 
-			success: false, 
-			message: `User Role Can't be Verified` 
-		});
-	}
-};
+// 		if (userDetails.accountType !== ACCOUNT_TYPE.INSTRUCTOR) {
+// 			return res.status(401).json({
+// 				success: false,
+// 				message: "This is a Protected Route for Instructor",
+// 			});
+// 		}
+// 		next();
+// 	} catch (error) {
+// 		return res.status(500).json({ 
+// 			success: false, 
+// 			message: `User Role Can't be Verified` 
+// 		});
+// 	}
+// };
 
-exports.isInstructorOrAdmin = async (req, res, next) => {
-	try {
-		const userDetails = await User.findOne({ email: req.user.email });
+// exports.isInstructorOrAdmin = async (req, res, next) => {
+// 	try {
+// 		const userDetails = await User.findOne({ email: req.user.email });
 
-		if (userDetails.accountType !== ACCOUNT_TYPE.INSTRUCTOR && userDetails.accountType !== ACCOUNT_TYPE.ADMIN) {
-			return res.status(401).json({
-				success: false,
-				message: "This is a Protected Route for Instructor",
-			});
-		}
-		next();
-	} catch (error) {
-		return res.status(500).json({ 
-			success: false, 
-			message: `User Role Can't be Verified` 
-		});
-	}
-};
+// 		if (userDetails.accountType !== ACCOUNT_TYPE.INSTRUCTOR && userDetails.accountType !== ACCOUNT_TYPE.ADMIN) {
+// 			return res.status(401).json({
+// 				success: false,
+// 				message: "This is a Protected Route for Instructor",
+// 			});
+// 		}
+// 		next();
+// 	} catch (error) {
+// 		return res.status(500).json({ 
+// 			success: false, 
+// 			message: `User Role Can't be Verified` 
+// 		});
+// 	}
+// };

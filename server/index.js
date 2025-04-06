@@ -2,11 +2,11 @@
 const express = require("express");
 const app = express();
 const userRoutes = require("./routes/userRoutes");
-const profileRoutes = require("./routes/profileRoutes");
-const courseRoutes = require("./routes/courseRoutes");
-const paymentRoutes = require("./routes/paymentRoutes");
-const contactUsRoute = require("./routes/contactRoutes");
-const adminRoutes = require("./routes/adminRoutes")
+// const profileRoutes = require("./routes/profileRoutes");
+// const courseRoutes = require("./routes/courseRoutes");
+// const paymentRoutes = require("./routes/paymentRoutes");
+// const contactUsRoute = require("./routes/contactRoutes");
+// const adminRoutes = require("./routes/adminRoutes")
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
