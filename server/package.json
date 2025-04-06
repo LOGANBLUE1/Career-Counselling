@@ -1,14 +1,14 @@
 {
-	"name": "edtech-backend",
+	"name": "career-counselling",
 	"version": "1.0.0",
-	"description": "edtech-backend",
+	"description": "career-counselling",
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
 		"dev": "nodemon index.js"
 	},
 	"keywords": [
-		"EdTech-backend"
+		"Career-counselling"
 	],
 	"author": "Aditya Pareek",
 	"license": "ISC",
