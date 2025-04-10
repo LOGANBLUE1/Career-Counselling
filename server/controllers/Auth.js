@@ -53,21 +53,21 @@ exports.signup = async (req, res) => {
       });
     }
 
-    // const recentOtp = await OTP.findOne({ email }).sort({ createdAt: -1 });
+    const recentOtp = await OTP.findOne({ email }).sort({ createdAt: -1 });
 
-    // if (!recentOtp) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "The OTP did not found"
-    //   });
-    // } 
+    if (!recentOtp) {
+      return res.status(400).json({
+        success: false,
+        message: "The OTP did not found"
+      });
+    }
 
-    // else if (otp !== recentOtp.otp) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "The OTP is not valid"
-    //   });
-    // }
+    else if (otp !== recentOtp.otp) {
+      return res.status(400).json({
+        success: false,
+        message: "The OTP is not valid"
+      });
+    }
     
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -128,32 +128,6 @@ exports.login = async (req, res) => {
     }
 
     if (await bcrypt.compare(password, user.password)) {
-      // check if user is inactive
-      if (!user.active) {
-        if (Date.now() - new Date(user.updatedAt).getTime() > 30 * 24 * 60 * 60 * 1000) {
-          return res.status(401).json({
-            success: false,
-            message: `User is Inactive for more than 30 days. Please contact Admin`
-          });
-        }
-        else{
-          //reactivate again
-          user.active = true;
-          // // create course progress for all courses
-          // const courseProgressIds = await Promise.all(
-          //   user.courses.map(async (course) => {
-          //     const courseProgress = await CourseProgress.create({
-          //       userId: user._id,
-          //       courseId: course._id,
-          //       completedVideos: [],
-          //     });
-          //     return courseProgress._id;
-          //   })
-          // )
-          // // user.courseProgress = courseProgressIds;
-          await user.save();
-        }
-      }
 
       const payload = { email: user.email, id: user._id, accountType: user.accountType };
       const token = jwt.sign( payload,
