@@ -3,7 +3,7 @@ import { useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import {useRouter} from "next/navigation";
-// import { login } from "@/services/operations/authAPI"
+import { login } from "@/services/operations/authAPI"
 import Link from "next/link";
 // import GoogleAuth from "./GoogleAuth"
 // import { ACCOUNT_TYPE } from "../../../utils/constants"
@@ -29,7 +29,7 @@ function LoginForm() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    // dispatch(login(email, password, router))
+    dispatch(login(email, password, router))
   }
 
   return (

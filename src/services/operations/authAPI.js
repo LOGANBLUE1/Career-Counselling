@@ -79,6 +79,7 @@ export function signUp(
       }
 
       toast.success("Signup Successful")
+      dispatch(login(email, password, router))
     } catch (error) {
       console.log("SIGNUP API ERROR............", error)
       toast.error("Signup Failed")
@@ -90,49 +91,49 @@ export function signUp(
   }
 }
 
-// export function login(
-//   email,
-//   password,
-//   router
-// ) {
-//   return async (dispatch) => {
-//     console.log("Inside login :", email, password)
-//     const toastId = toast.loading("Loading...")
-//     dispatch(setLoading(true))
-//     try {
-//       const response = await apiConnector(HTTP_METHODS.POST, LOGIN_API, {
-//         email,
-//         password,
-//       })
-//       console.log("Backend Url: ", process.env.REACT_APP_BASE_URL);
-//
-//       // console.log("LOGIN API RESPONSE............", response)
-//
-//       // if user does not exist
-//       if (!response.success) {
-//         toast.error(response.message);
-//         if(response.status === HTTP_STATUS_CODE.NotFound)
-//           router.push("/signup")
-//         return;
-//       }
-//
-//       toast.success("Login Successful")
-//       dispatch(setToken(response.token))
-//       const userImage = response?.user?.image ??
-//         `https://api.dicebear.com/5.x/initials/svg?seed=${response.user.firstName} ${response.user.lastName}`
-//
-//       dispatch(setUser({ ...response.user, image: userImage }))
-//       localStorage.setItem("token", JSON.stringify(response.token))
-//       router.push("/dashboard/my-profile")
-//     } catch (error) {
-//       console.log("LOGIN API ERROR............", error)
-//       toast.error("Login Failed")
-//     } finally {
-//       dispatch(setLoading(false))
-//       toast.dismiss(toastId)
-//     }
-//   }
-// }
+export function login(
+  email,
+  password,
+  router
+) {
+  return async (dispatch) => {
+    console.log("Inside login :", email, password)
+    const toastId = toast.loading("Loading...")
+    dispatch(setLoading(true))
+    try {
+      const response = await apiConnector(HTTP_METHODS.POST, LOGIN_API, {
+        email,
+        password,
+      })
+      console.log("Backend Url: ", process.env.REACT_APP_BASE_URL);
+
+      // console.log("LOGIN API RESPONSE............", response)
+
+      // if user does not exist
+      if (!response.success) {
+        toast.error(response.message);
+        if(response.status === HTTP_STATUS_CODE.NotFound)
+          router.push("/signup")
+        return;
+      }
+
+      toast.success("Login Successful")
+      dispatch(setToken(response.token))
+      const userImage = response?.user?.image ??
+        `https://api.dicebear.com/5.x/initials/svg?seed=${response.user.firstName} ${response.user.lastName}`
+
+      dispatch(setUser({ ...response.user, image: userImage }))
+      localStorage.setItem("token", JSON.stringify(response.token))
+      router.push("/dashboard/my-profile")
+    } catch (error) {
+      console.log("LOGIN API ERROR............", error)
+      toast.error("Login Failed")
+    } finally {
+      dispatch(setLoading(false))
+      toast.dismiss(toastId)
+    }
+  }
+}
 
 export function getPasswordResetToken(
   email, 
@@ -204,7 +205,6 @@ export function logout(router) {
   return (dispatch) => {
     dispatch(setToken(null))
     dispatch(setUser(null))
-    dispatch(resetCart())
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     toast.success("Logged Out")
