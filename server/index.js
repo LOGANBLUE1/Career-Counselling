@@ -2,10 +2,10 @@
 const express = require("express");
 const app = express();
 const userRoutes = require("./routes/userRoutes");
-// const profileRoutes = require("./routes/profileRoutes");
+const profileRoutes = require("./routes/profile");
 // const courseRoutes = require("./routes/courseRoutes");
 // const paymentRoutes = require("./routes/paymentRoutes");
-// const contactUsRoute = require("./routes/contactRoutes");
+const contactUsRoute = require("./routes/Contact");
 // const adminRoutes = require("./routes/adminRoutes")
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
@@ -26,7 +26,7 @@ app.use(cookieParser());
 
 app.use(
 	cors({
-		origin: ["http://localhost:3000", "https://edtech-website-tau.vercel.app"],
+		origin: ["http://localhost:3000", "https://edtech-website-tau.vercel.app", "*"],
 		credentials: true
 	})
 );
@@ -42,6 +42,8 @@ cloudinaryConnect();
 
 // Setting up routes
 app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/reach", contactUsRoute);
+app.use("/api/v1/profile", profileRoutes);
 
 // Testing the server
 app.get("/", (req, res) => {

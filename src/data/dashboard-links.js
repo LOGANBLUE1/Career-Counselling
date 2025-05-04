@@ -42,18 +42,4 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.STUDENT,
     icon: "VscArchive",
   },
-  {
-    id: 7,
-    name: "Controls",
-    path: "/dashboard/controls",
-    type: ACCOUNT_TYPE.ADMIN,
-    icon: "VscArchive",
-  },
-  {
-    id: 8,
-    name: "Hit API",
-    path: "/dashboard/hitapi",
-    type: ACCOUNT_TYPE.ADMIN,
-    icon: "VscArchive",
-  }
 ]

@@ -1,5 +1,3 @@
-import { toast } from "react-hot-toast"
-import { IS_LOCALHOST } from "../utils/constants"
 export const apiConnector = async (method, url, bodyData = null, headers = {}, params = {}) => {
   try {
     // Remove Content-Type if bodyData is FormData, let fetch handle it
@@ -13,8 +11,7 @@ export const apiConnector = async (method, url, bodyData = null, headers = {}, p
       method: method.toUpperCase(),
       headers: headers,
     };
-    if(IS_LOCALHOST)
-      console.log("API Request:", method, url, bodyData);
+
     // Set the body to bodyData (either FormData or JSON string)
     if (bodyData) {
       options.body = bodyData instanceof FormData ? bodyData : JSON.stringify(bodyData);
@@ -22,34 +19,35 @@ export const apiConnector = async (method, url, bodyData = null, headers = {}, p
 
     // Handle query parameters
     const queryString = params ? `?${new URLSearchParams(params)}` : '';
-    url += queryString;
+    const requestUrl = `${url}${queryString}`;
+
+    console.log("Request", requestUrl, bodyData, params)
+
+    // Log the full request details
 
     // Make the fetch request
-    const response = await fetch("http://localhost:4000/api/v1" + url, options);
+    const response = await fetch(requestUrl, options);
 
     let data;
     const contentType = response.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {
       data = await response.json();
-      data.status = response.status;
-      if(IS_LOCALHOST)
-        console.log("RES:",url,data)
-      // console.log("Resonse :", data)
-      if(!response.ok) {
-        if (response.status === 500)
-          data.message = "Server is down, please try again later";
-        toast.error(data?.message || "API response is not OK");
-      }
     } else {
       const text = await response.text();
       throw new Error(`Unexpected content-type: ${contentType}, Response: ${text}`);
     }
+
+    // Handle server errors gracefully
+    if (response.status === 500) {
+      data.message = "Server is down, please try again later";
+    }
+    
     return data;
   } catch (error) {
     console.error("API Connector Error:", error);
     return {
       success: false,
-      message: 'API Connector throwing Error',
+      message: 'Server Error occurred',
       status: null,
     };
   }

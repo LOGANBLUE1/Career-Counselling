@@ -5,7 +5,6 @@ import { resetCart } from "../../slices/cartSlice"
 import { setPaymentLoading } from "../../slices/courseSlice"
 import { apiConnector } from "../apiConnector"
 import { studentEndpoints } from "../apis"
-import { HTTP_METHODS } from "../../utils/constants"
 
 const {
   COURSE_PAYMENT_API,
@@ -42,12 +41,14 @@ export async function BuyCourse(
     const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
 
     if (!res) {
-      toast.error("Razorpay SDK failed to load. Check your Internet Connection.")
+      toast.error(
+        "Razorpay SDK failed to load. Check your Internet Connection."
+      )
       return
     }
 
     // Initiating the Order in Backend
-    const orderResponse = await apiConnector(HTTP_METHODS.POST,
+    const orderResponse = await apiConnector("POST",
       COURSE_PAYMENT_API, 
       {courses},
       { Authorization: `Bearer ${token}`}
@@ -100,7 +101,7 @@ export async function BuyFreeCourse(
   const toastId = toast.loading("Loading...")
   try {
     // Initiating the Order in Backend
-    const orderResponse = await apiConnector(HTTP_METHODS.POST,
+    const orderResponse = await apiConnector("POST",
       COURSE_PAYMENT_API, 
       {courses},
       { Authorization: `Bearer ${token}`}
@@ -131,7 +132,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
   const toastId = toast.loading("Verifying Payment...")
   dispatch(setPaymentLoading(true))
   try {
-    const response = await apiConnector(HTTP_METHODS.POST, 
+    const response = await apiConnector("POST", 
       COURSE_VERIFY_API, 
       bodyData, 
       { Authorization: `Bearer ${token}`}
@@ -144,7 +145,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
     }
 
     toast.success("Payment Successful. You are Added to the course ")
-    navigate("/dashboard/enrolled-courses")
+    navigate.push("/dashboard/enrolled-courses")
     dispatch(resetCart())
   } catch (error) {
     console.log("PAYMENT VERIFY ERROR............", error)
@@ -157,7 +158,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
 // Send the Payment Success Email
 async function sendPaymentSuccessEmail(response, amount, token) {
   try {
-    await apiConnector(HTTP_METHODS.POST,
+    await apiConnector("POST",
       SEND_PAYMENT_SUCCESS_EMAIL_API,
       {
         orderId: response.razorpay_order_id,

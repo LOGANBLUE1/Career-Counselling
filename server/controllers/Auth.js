@@ -4,39 +4,38 @@ const OTP = require("../models/OTP")
 // const CourseProgress = require("../models/CourseProgress")
 const jwt = require("jsonwebtoken")
 const otpGenerator = require("otp-generator")
-// const mailSender = require("../utils/mailSender")
-// const { passwordUpdated } = require("../mail/templates/passwordUpdate")
-// const Profile = require("../models/Profile")
+const mailSender = require("../utils/mailSender")
+const { passwordUpdated } = require("../mail/templates/passwordUpdate")
+const Profile = require("../models/Profile")
 require("dotenv").config()
 
 exports.signup = async (req, res) => {
   try {
     const { firstName, lastName, email,
-      password, confirmPassword, accountType, otp } = req.body;
-    console.log("Inside signup function : ", req.body)
+      password, confirmPassword, otp } = req.body;
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword || !accountType || !otp) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !otp) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required"
       });
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid email address',
-      });
-    }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // if (!emailRegex.test(email)) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: 'Invalid email address',
+    //   });
+    // }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    if (!passwordRegex.test(password)) {
-      return res.status(400).json({
-        success: false,
-        message: "Password must be at least 6 characters long and include one number, one lowercase letter, one uppercase letter, and one special character."
-      });
-    }
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    // if (!passwordRegex.test(password)) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Password must be at least 6 characters long and include one number, one lowercase letter, one uppercase letter, and one special character."
+    //   });
+    // }
     
     if (password !== confirmPassword) {
       return res.status(400).json({
@@ -71,22 +70,21 @@ exports.signup = async (req, res) => {
     
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // const profileDetails = await Profile.create({
-    //   gender: null,
-    //   dateOfBirth: null,
-    //   about: null,
-    //   contactNumber: null
-    // })
+    const profileDetails = await Profile.create({
+      gender: null,
+      dateOfBirth: null,
+      about: null,
+      contactNumber: null
+    })
 
     const user = await User.create({
       firstName,
       lastName,
       email: email.toLowerCase(),
       password: hashedPassword,
-      accountType,
       active:true,
       approved:false,
-      // additionalDetails: profileDetails._id,
+      additionalDetails: profileDetails._id,
       image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
     })
 
@@ -167,6 +165,7 @@ exports.login = async (req, res) => {
 
 exports.sendotp = async (req, res) => {
   try {
+    console.log(req.body);
     const { email } = req.body;
 
     // Basic email validation (optional)

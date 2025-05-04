@@ -15,6 +15,7 @@ exports.updateProfile = async (req, res) => {
     const id = req.user.id;
 
     // Find the user by id
+    console.log("inside update profile")
     const userDetails = await User.findById(id);
     if (!userDetails) {
       return res.status(404).json({
@@ -23,7 +24,8 @@ exports.updateProfile = async (req, res) => {
       });
     }
 
-    // Find the profile associated with the user
+    // Find the profile associated with the user'
+    console.log("userDetails: ", userDetails)
     const profile = await Profile.findById(userDetails.additionalDetails);
     if (!profile) {
       return res.status(404).json({
@@ -102,7 +104,7 @@ exports.getAllUserDetails = async (req, res) => {
     const userDetails = await User.findById(id)
       .populate("additionalDetails")
       .exec()
-    // console.log(userDetails)
+    console.log(userDetails)
     res.status(200).json({
       success: true,
       message: "User Data fetched successfully",
@@ -118,6 +120,7 @@ exports.getAllUserDetails = async (req, res) => {
 
 exports.updateDisplayPicture = async (req, res) => {
   try {
+    console.log("inside update profile display picture")
     const displayPicture = req.files?.displayPicture
     if(!displayPicture){
       return res.status(400).json({

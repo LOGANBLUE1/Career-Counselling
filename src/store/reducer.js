@@ -1,8 +1,8 @@
-import { combineReducers } from "@reduxjs/toolkit"
+import { combineReducers } from "@reduxjs/toolkit";
 
-import authReducer from "./slices/authSlice"
-import profileReducer from "./slices/profileSlice"
-import modeReducer from "./slices/modeSlice"
+import authReducer from "./slices/authSlice";
+import profileReducer from "./slices/profileSlice";
+import modeReducer from "./slices/modeSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -10,4 +10,4 @@ const rootReducer = combineReducers({
   mode: modeReducer,
 })
 
-export default rootReducer
+export default rootReducer;
