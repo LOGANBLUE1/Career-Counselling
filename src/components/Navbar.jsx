@@ -30,7 +30,7 @@ export default function Navbar(){
   }
 
   return (
-    <div>
+    <div className='relative'>
       <nav className="bg-gray-100 border-gray-200 dark:bg-gray-900 fixed top-0 left-0 w-full shadow-md z-50">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -87,45 +87,50 @@ export default function Navbar(){
             className={`${isMenuOpen ? 'block' : 'hidden'} items-center justify-between w-full md:flex md:w-auto md:order-1`}
           >
             <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-              <li className='lg:hover:underline underline-offset-2'>
-                <Link href="/" className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:bg-transparent md:dark:text-blue-500">Home</Link>
+              <li className=''>
+                <Link href="/" className="block py-2 px-3 md:p-0 text-gray-900 hover:text-primary rounded-sm md:bg-transparent md:dark:text-blue-500">Home</Link>
               </li>
-              <li className='lg:hover:underline underline-offset-2'>
-                <Link href="/about" className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent">About</Link>
+              <li className=''>
+                <Link href="/about" className="block py-2 px-3 md:p-0 text-gray-900 hover:text-primary rounded-sm hover:bg-gray-100 md:hover:bg-transparent">About</Link>
               </li>
-              {/* <li className='lg:hover:underline underline-offset-2'>
+              {/* <li className=''>
                 <Link href="#" className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent">Services</Link>
               </li> */}
               <li className="relative group ">
-                <span className="block py-2 px-3 md:p-0 text-gray-900 cursor-pointer rounded-sm hover:text-gray-600">
+                <span className="block py-2 px-3 md:p-0 text-gray-900 cursor-pointer rounded-sm hover:text-primary">
                   Services
                 </span>
                 {/* Dropdown menu */}
                 <ul className="absolute hidden group-hover:block shadow-lg rounded-md p-2 w-40 z-10 bg-sky-50">
-                <li className='hover:underline underline-offset-2'>
+                <li className='hover:text-primary'>
                     <Link href="/services" className="block px-4 py-2 text-gray-700">
                       Our Services
                     </Link>
                   </li>
-                  <li className='hover:underline underline-offset-2'>
+                  <li className='hover:text-primary'>
                     <Link href="/college-predictor" className="block px-4 py-2 text-gray-700">
                       College Predictor
                     </Link>
                   </li>
-                  <li className='hover:underline underline-offset-2'>
+                  <li className='hover:text-primary'>
                     <Link href="/services/ml" className="block px-4 py-2 text-gray-700">
                       AI / ML
                     </Link>
                   </li>
-                  <li className='hover:underline underline-offset-2'>
+                  <li className='hover:text-primary'>
                     <Link href="/services/consulting" className="block px-4 py-2 text-gray-700">
                       Consulting
                     </Link>
                   </li>
                 </ul>
               </li>
-              <li className='lg:hover:underline underline-offset-2'>
-                <Link href="/contact" className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent">Contact</Link>
+              {token && 
+                <li className=''>
+                  <Link href="/dashboard/profile" className="block py-2 px-3 md:p-0 text-gray-900 hover:text-primary rounded-sm hover:bg-gray-100 md:hover:bg-transparent">Profile</Link>
+                </li>
+              }
+              <li className=''>
+                <Link href="/contact" className="block py-2 px-3 md:p-0 text-gray-900 hover:text-primary rounded-sm hover:bg-gray-100 md:hover:bg-transparent">Contact</Link>
               </li>
             </ul>
           </div>

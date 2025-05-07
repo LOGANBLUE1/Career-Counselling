@@ -7,6 +7,7 @@ require("dotenv").config();
 exports.auth = async (req, res, next) => {
 	try {
 		// Extracting JWT from request cookies, body or header
+		// console.log(req)
 		const token =
 			req.cookies.token ||
 			req.body.token ||
@@ -27,6 +28,7 @@ exports.auth = async (req, res, next) => {
 			// Storing the decoded JWT payload in the request object for further use
 			req.user = decode;
 		} catch (error) {
+			console.log(error)
 			// If JWT verification fails, return 401 Unauthorized response
 			return res.status(401).json({ 
 				success: false,
@@ -36,6 +38,7 @@ exports.auth = async (req, res, next) => {
 		// If JWT is valid, move on to the next middleware or request handler
 		next();
 	} catch (error) {
+		console.log(error)
 		// If there is an error during the authentication process, return 401 Unauthorized response
 		return res.status(401).json({
 			success: false,

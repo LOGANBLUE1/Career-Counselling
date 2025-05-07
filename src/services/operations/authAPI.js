@@ -118,7 +118,7 @@ export function login(
       dispatch(setUser({ ...response.user, image: userImage }))
       console.log("User Data", response.user)
       localStorage.setItem("token", JSON.stringify(response.token))
-      navigate.push("/profile")
+      navigate.push("/dashboard/profile")
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
       toast.error("Login Failed")

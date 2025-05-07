@@ -30,7 +30,7 @@ import { Section } from '../components/Section';
 // };
 
 // Reusable Milestones Component
-const Milestones = ({ milestones }: { milestones: { year: string; description: string }[] }) => {
+const Milestones = ({ milestones }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {milestones.map((milestone, index) => (
@@ -44,7 +44,7 @@ const Milestones = ({ milestones }: { milestones: { year: string; description: s
 };
 
 // Reusable Achievements Component
-const Achievements = ({ achievements }: { achievements: { title: string; value: string }[] }) => {
+const Achievements = ({ achievements }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
       {achievements.map((achievement, index) => (
@@ -69,12 +69,12 @@ const AboutPage = () => {
   }
 
   return (
-    <div className="mx-auto p-12 max-w-full sm:max-w-3xl md:max-w-5xl lg:max-w-7xl rounded-lg overflow-hidden animate-fade-in">
-      <div className="container relative mx-auto max-w-full sm:max-w-2xl md:max-w-4xl lg:max-w-6xl rounded-lg overflow-hidden"></div>
+    <div className="mx-auto p-10 max-w-full sm:max-w-3xl md:max-w-6xl lg:max-w-7xl rounded-lg overflow-hidden animate-fade-in">
+      <div className="container relative mx-auto max-w-full sm:max-w-2xl md:max-w-4xl lg:max-w-7xl rounded-lg overflow-hidden"></div>
           <Section
             title="About Us"
             description="India's largest mentorship platform. Mentoring | Exam Prep. We understand that every aspirant faces a unique set of challenges in their NEET/JEE preparation journey. CareerCompass connects NEET/JEE aspirants to IIT/AIIMS mentors to guide them through every stage of preparation, including one-on-one mentorship, daily motivation, memory retention skills, study plans, and more."
-            imageSrc="/images/student.png"
+            imageSrc="/images/student1.png"
             imageAlt="About Us Illustration"
           />
 
@@ -91,7 +91,7 @@ const AboutPage = () => {
           <Section
             title="How do we help NEET/JEE Aspirants?"
             description="We understand that every aspirant faces a unique set of challenges in their NEET/JEE preparation journey. CareerCompass connects NEET/JEE aspirants to IIT/AIIMS mentors to guide them through every stage of preparation, including one-on-one mentorship, daily motivation, memory retention skills, study plans, and more."
-            imageSrc="/images/student.png"
+            imageSrc="/images/student1.png"
             imageAlt="How We Help Illustration"
           />
 
@@ -108,7 +108,7 @@ const AboutPage = () => {
           <Section
             title="Our Mission"
             description="The mission of CareerCompass is to transform mentorship and make it accessible to every student and aspirant across the world. We ensure that every student gets the correct motivation and the right mentors to clear their exams."
-            imageSrc="/images/student.png"
+            imageSrc="/images/student1.png"
             imageAlt="Our Mission Illustration"
           />
 

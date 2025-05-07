@@ -8,20 +8,15 @@ import { Send, Bot, User, Loader, Trash2 } from "lucide-react"; // Add Trash2 im
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 
-function App() {
+function CollegePredictor() {
   const [input, setInput] = useState("");
-  interface Message {
-    sender: "user" | "ai";
-    text: string;
-    timestamp: string;
-    isError?: boolean;
-  }
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [thinking, setThinking] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const MODEL_URL = process.env.MODEL_URL
 
   // Auto-scroll to bottom of messages
   const scrollToBottom = () => {
@@ -30,8 +25,9 @@ function App() {
 
   const clearMessages = async (e) => {
     e.preventDefault();
-    // const res = await axios.post("http://127.0.0.1:8000/clear");
-    // console.log("Clear Response : ", res);
+    console.log("inside clear message")
+    const res = await axios.post("http://localhost:8001/clear");
+    console.log("Clear Response : ", res);
     setMessages([]);
     localStorage.removeItem("chatMessages");
   };
@@ -85,7 +81,8 @@ function App() {
       await simulateThinking();
       setThinking(false);
 
-      const res = await axios.post("http://127.0.0.1:8000/ask", { message: trimmedInput });
+      const res = await axios.post("http://localhost:8001/ask", { message: trimmedInput });
+      console.log("Ask Response : ", res);
       const agentReply = res.data.response || res.data.error;
       const aiMessage = { 
         sender: "ai", 
@@ -122,30 +119,32 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-700 flex flex-col">
+    <div className="relative min-h-screen bg-gray-700 flex flex-col mt-6">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Bot className="h-8 w-8 text-blue-600" />
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              AI Agent Chat
-            </h1>
+      <div className="fixed w-full h-16 z-10">
+        <header className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
+          <div className="max-w-5xl mx-auto flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Bot className="h-8 w-8 text-blue-600" />
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                AI Agent Chat
+              </h1>
+            </div>
+            {/* <div className="text-md text-gray-500">Your Assistant</div> */}
+            {/* Clear Messages Button */}
+            <button
+              onClick={clearMessages}
+              className="p-2 bg-red-600 text-white rounded-md hover:bg-red-700 flex items-center space-x-1"
+            >
+              <span>Clear Chat</span>
+              <Trash2 size={16} />
+            </button>
           </div>
-          {/* <div className="text-md text-gray-500">Your Assistant</div> */}
-          {/* Clear Messages Button */}
-          <button
-            onClick={clearMessages}
-            className="p-2 bg-red-600 text-white rounded-md hover:bg-red-700 flex items-center space-x-1"
-          >
-            <span>Clear Chat</span>
-            <Trash2 size={16} />
-          </button>
-        </div>
-      </header>
+        </header>
+      </div>
 
       {/* Main chat container */}
-      <main className="flex-1 overflow-hidden flex flex-col max-w-5xl w-full mx-auto">
+      <div className="relative mt-16 overflow-hidden flex flex-col max-w-5xl w-full mx-auto">
         {/* Welcome message if no messages */}
         {messages.length === 0 && (
           <div className="flex-1 flex items-center justify-center p-6">
@@ -209,8 +208,8 @@ function App() {
         )}
 
         {/* Input area */}
-        <div className="">
-          <form onSubmit={handleQuery} className="max-w-4xl mx-auto fixed bottom-0 w-full shadow-md z-50">
+        <div className="px-4 max-w-4xl">
+          <form onSubmit={handleQuery} className="relative mx-auto fixed bottom-0 w-full shadow-md z-20">
             <div className="relative shadow-sm rounded-lg">
               <textarea
                 ref={inputRef}
@@ -226,12 +225,12 @@ function App() {
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className={`absolute right-3 bottom-3 p-2 rounded-md ${loading || !input.trim() ? "bg-white text-gray-400" : "bg-blue-600 text-white hover:bg-blue-700"} transition-colors`}
+                className={`absolute right-3 bottom-3 p-2 rounded-md ${loading || !input.trim() ? "bg-white" : "bg-primary"} transition-colors`}
               >
                 {loading ? (
                   <Loader className="text-black h-5 w-5 animate-spin" />
                 ) : (
-                  <Send className="text-black h-6 w-8" />
+                  <Send className={`h-6 w-8 ${loading || !input.trim() ? "text-black" : "text-white"}`} />
                 )}
               </button>
             </div>
@@ -240,11 +239,11 @@ function App() {
             </div>
           </form>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
 
-App.showFooter = false;
+CollegePredictor.showFooter = false;
 
-export default App;
+export default CollegePredictor;

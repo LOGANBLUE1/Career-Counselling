@@ -52,7 +52,7 @@ exports.signup = async (req, res) => {
       });
     }
 
-    const recentOtp = await OTP.findOne({ email }).sort({ createdAt: -1 });
+    const recentOtp = await OTP.findOne({ email : email.toLowerCase() }).sort({ createdAt: -1 });
 
     if (!recentOtp) {
       return res.status(400).json({

@@ -7,51 +7,51 @@ const {courseEnrollmentEmail,} = require("../mail/templates/courseEnrollmentEmai
 const CourseProgress = require("../models/CourseProgress")
 
 exports.capturePayment = async (req, res) => {
-    const { courses } = req.body
+    // const { courses } = req.body
     const userId = req.user.id
     const user = await User.findById(userId)
-    if (!courses || courses.length === 0) {
-      return res.json({ 
-        success: false, 
-        message: "Please Provide Course ID" 
-      })
-    }
+    // if (!courses || courses.length === 0) {
+    //   return res.json({ 
+    //     success: false, 
+    //     message: "Please Provide Course ID" 
+    //   })
+    // }
   
-    let total_amount = 0
+    // let total_amount = 0
   
-    for (const course_id of courses) {
-      let course
-      try {
-        // Find the course by its ID
-        course = await Course.findById(course_id)
+    // for (const course_id of courses) {
+    //   let course
+    //   try {
+    //     // Find the course by its ID
+    //     course = await Course.findById(course_id)
   
-        // If the course is not found, return an error
-        if (!course) {
-          return res.json({ 
-            success: false, 
-            message: "Could not find the Course" 
-          })
-        }
+    //     // If the course is not found, return an error
+    //     if (!course) {
+    //       return res.json({ 
+    //         success: false, 
+    //         message: "Could not find the Course" 
+    //       })
+    //     }
   
-        // Check if the user is already enrolled in the course
-        // const uid = new mongoose.Types.ObjectId(userId)
-        if (user.courses.includes(course_id)) {
-          return res.status(400).json({ 
-            success: false, 
-            message: "Student is already Enrolled" 
-          })
-        }
+    //     // Check if the user is already enrolled in the course
+    //     // const uid = new mongoose.Types.ObjectId(userId)
+    //     if (user.courses.includes(course_id)) {
+    //       return res.status(400).json({ 
+    //         success: false, 
+    //         message: "Student is already Enrolled" 
+    //       })
+    //     }
   
-        // Add the price of the course to the total amount
-        total_amount += course.price
-      } catch (error) {
-        console.log(error)
-        return res.status(500).json({ 
-          success: false, 
-          message: 'Error in adding course' 
-        })
-      }
-    }
+    //     // Add the price of the course to the total amount
+    //     total_amount += course.price
+    //   } catch (error) {
+    //     console.log(error)
+    //     return res.status(500).json({ 
+    //       success: false, 
+    //       message: 'Error in adding course' 
+    //     })
+    //   }
+    // }
     // console.log("Total amount: ", total_amount)
   
     res.status(200).json({
@@ -60,7 +60,7 @@ exports.capturePayment = async (req, res) => {
         currecy: "INR",
         orderId: "fake_order_id",
         amount: total_amount*100,
-        courses
+        // courses
     })
 }
 

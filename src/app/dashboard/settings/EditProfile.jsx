@@ -33,8 +33,8 @@ export default function EditProfile() {
     <>
       <form onSubmit={handleSubmit(submitProfileForm)}>
         {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-          <h2 className="text-lg font-semibold text-richblack-5">
+        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-sky-50 p-8 px-12">
+          <h2 className="text-2xl font-semibold text-richblack-5">
             Profile Information
           </h2>
           <div className="flex flex-col gap-5 lg:flex-row">
@@ -46,64 +46,64 @@ export default function EditProfile() {
                 type="text"
                 name="firstName"
                 id="firstName"
-                placeholder="Enter first name"
-                className="form-style"
+                placeholder="Enter first name..."
                 {...register("firstName", { required: true })}
                 defaultValue={user?.firstName}
                 onKeyDown={allowOnlyAlphabet}
+                className="form-style w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-500 rounded-md px-3 py-2"
               />
               {errors.firstName && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-500">
                   Please enter your first name.
                 </span>
               )}
-            </div>
-            <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="lastName" className="lable-style">
-                Last Name
-              </label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Enter first name"
-                className="form-style"
-                {...register("lastName", { required: true })}
-                defaultValue={user?.lastName}
-                onKeyDown={allowOnlyAlphabet}
+              </div>
+              <div className="flex flex-col gap-2 lg:w-[48%]">
+                <label htmlFor="lastName" className="lable-style">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  placeholder="Enter last name..."
+                  {...register("lastName", { required: true })}
+                  defaultValue={user?.lastName}
+                  onKeyDown={allowOnlyAlphabet}
+                  className="form-style w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-500 rounded-md px-3 py-2"
               />
               {errors.lastName && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-500">
                   Please enter your last name.
                 </span>
               )}
-            </div>
-          </div>
+              </div>
+              </div>
 
-          <div className="flex flex-col gap-5 lg:flex-row">
-            <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="dateOfBirth" className="lable-style">
-                Date of Birth
-              </label>
-              <input
-                type="date"
-                name="dateOfBirth"
-                id="dateOfBirth"
-                className="form-style"
-                {...register("dateOfBirth", {
-                  required: {
-                    value: true,
-                    message: "Please enter your Date of Birth.",
-                  },
-                  max: {
-                    value: new Date().toISOString().split("T")[0],
-                    message: "Date of Birth cannot be in the future.",
-                  },
-                })}
-                defaultValue={user?.additionalDetails?.dateOfBirth}
-              />
+              <div className="flex flex-col gap-5 lg:flex-row">
+                <div className="flex flex-col gap-2 lg:w-[48%]">
+                  <label htmlFor="dateOfBirth" className="lable-style">
+                    Date of Birth
+                  </label>
+                  <input
+                    type="date"
+                    name
+                    id="dateOfBirth"
+                    className="form-style w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-500 rounded-md px-3 py-2"
+                    {...register("dateOfBirth", {
+                      required: {
+                        value: true,
+                        message: "Please enter your Date of Birth.",
+                      },
+                      max: {
+                        value: new Date().toISOString().split("T")[0],
+                        message: "Date of Birth cannot be in the future.",
+                      },
+                    })}
+                    defaultValue={user?.additionalDetails?.dateOfBirth}
+                  />
               {errors.dateOfBirth && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-500">
                   {errors.dateOfBirth.message}
                 </span>
               )}
@@ -116,7 +116,7 @@ export default function EditProfile() {
                 type="text"
                 name="gender"
                 id="gender"
-                className="form-style"
+                className="form-style w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-500 rounded-md px-3 py-2"
                 {...register("gender", { required: true })}
                 defaultValue={user?.additionalDetails?.gender}
               >
@@ -129,7 +129,7 @@ export default function EditProfile() {
                 })}
               </select>
               {errors.gender && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-500">
                   Please enter your Date of Birth.
                 </span>
               )}
@@ -146,7 +146,7 @@ export default function EditProfile() {
                 name="contactNumber"
                 id="contactNumber"
                 placeholder="Enter Contact Number"
-                className="form-style"
+                className="form-style w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-500 rounded-md px-3 py-2"
                 {...register("contactNumber", {
                   required: {
                     value: true,
@@ -158,7 +158,7 @@ export default function EditProfile() {
                 defaultValue={user?.additionalDetails?.contactNumber}
               />
               {errors.contactNumber && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-500">
                   {errors.contactNumber.message}
                 </span>
               )}
@@ -172,12 +172,12 @@ export default function EditProfile() {
                 name="about"
                 id="about"
                 placeholder="Enter Bio Details"
-                className="form-style"
+                className="form-style w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-500 rounded-md px-3 py-2"
                 {...register("about", { required: true })}
                 defaultValue={user?.additionalDetails?.about}
               />
               {errors.about && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-500">
                   Please enter your About.
                 </span>
               )}
@@ -188,7 +188,7 @@ export default function EditProfile() {
         <div className="flex justify-end gap-2">
           <button
             onClick={() => {
-              navigate.push("/dashboard/my-profile")
+              navigate.push("/dashboard/profile")
             }}
             className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
           >

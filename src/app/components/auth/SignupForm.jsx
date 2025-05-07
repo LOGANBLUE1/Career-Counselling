@@ -54,14 +54,12 @@ function SignupForm({name}) {
     e.preventDefault();
     // Password Validation
     // if (!passwordRegex.test(password)) {
-    //   console.log("pwd error")
     //   toast.error("Password must be at least 6 characters long and include Number, lowercase letter, uppercase letter, and special character.");
     //   return;
     // }
 
     if(name == "signup") {
       if(password !== confirmPassword) {
-        console.log("pwd error2")
         toast.error("Passwords do not match.");
         return;
       }
@@ -70,7 +68,6 @@ function SignupForm({name}) {
         ...formData,
         // accountType,
       };
-      console.log("123")
       // Setting signup data to state
       dispatch(setUser(signupData));
       dispatch(setSignupData(signupData));
@@ -98,14 +95,14 @@ function SignupForm({name}) {
 
   return (
   <form onSubmit={handleOnSubmit}>
-      <Card className="bg-white shadow-[rgba(0,0,0,0.24)_0px_3px_8px] w-full max-w-md m-2">
-      <CardContent className="p-8">
+    <Card className="bg-sky-50 shadow-[rgba(0,0,0,0.24)_0px_3px_8px] m-2">
+      <CardContent className="py-4 px-6">
         <h2 className="text-2xl font-semibold text-center mb-6">{name == "signup" ? "Create Account" : "Welcome"}</h2>
-        <div className="space-y-4">
+        <div className="space-y-3">
         {name == "signup" && 
           <>
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">First Name</label>
+            <label htmlFor="name" className="block text-sm text-gray-700 font-bold">First Name</label>
             <div className="relative">
               <Input
                 required
@@ -114,14 +111,14 @@ function SignupForm({name}) {
                 value={firstName}
                 onChange={handleOnChange}
                 placeholder="Enter first name"
-                className="pl-10 text-gray-700"
+                className="pl-10 text-gray-700 placeholder:text-slate-400 focus:border-gray-400 focus:border-2"
               />
-              <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-500"/>
+              <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-500"/>
             </div>
           </div>
 
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Last Name</label>
+            <label htmlFor="name" className="block text-sm text-gray-700 font-bold">Last Name</label>
             <div className="relative">
               <Input
                 required
@@ -130,15 +127,16 @@ function SignupForm({name}) {
                 value={lastName}
                 onChange={handleOnChange}
                 placeholder="Enter last name"
-                className="pl-10 text-gray-700"
+                // form-style w-full bg-transparent placeholder:text-slate-400 focus:border-gray-400 focus:border-2 text-slate-700 text-sm border border-slate-500 rounded-md px-3 py-2
+                className="pl-10 text-gray-700 placeholder:text-slate-400 focus:border-gray-400 focus:border-2"
               />
-              <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-500"/>
+              <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-500"/>
             </div>
           </div>
           </>
         }
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-sm text-gray-700 font-bold">Email</label>
             <div className="relative">
               <Input
                 required
@@ -147,14 +145,14 @@ function SignupForm({name}) {
                 value={email}
                 onChange={handleOnChange}
                 placeholder="Enter email address"
-                className="pl-10 text-gray-700"
+                className="pl-10 text-gray-700 placeholder:text-slate-400 focus:border-gray-400 focus:border-2"
               />
-              <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-500"/>
+              <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-500"/>
             </div>
           </div>
 
           <label className="relative">
-            <p className="mt-2 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            <p className="mt-2 text-[0.875rem] leading-[1.375rem] font-bold">
               Password <sup className="text-pink-200">*</sup>
             </p>              
             <Input
@@ -164,11 +162,11 @@ function SignupForm({name}) {
               value={password}
               onChange={handleOnChange}
               placeholder="Password"
-              className="form-style w-full !pr-10 text-gray-700"
+              className="form-style w-full !pr-10 text-gray-700 placeholder:text-slate-400 focus:border-gray-400 focus:border-2"
             />
             <span
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+              className="absolute right-3 top-[32px] z-[10] cursor-pointer"
             >
               {showPassword ? (
                 <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
@@ -180,7 +178,7 @@ function SignupForm({name}) {
 
           {name == "signup" && 
               <label className="relative">
-                <p className="mt-2 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                <p className="mt-2 text-[0.875rem] leading-[1.375rem] font-bold">
                   Confirm Password <sup className="text-pink-200">*</sup>
                 </p>              
                 <Input
@@ -190,7 +188,7 @@ function SignupForm({name}) {
                   value={confirmPassword}
                   onChange={handleOnChange}
                   placeholder="Confirm Password"
-                  className="form-style w-full !pr-10 text-gray-700"
+                  className="form-style w-full !pr-10 text-gray-700 placeholder:text-slate-400 focus:border-gray-400 focus:border-2"
                 />
                 <span
                   onClick={() => setShowConfirmPassword((prev) => !prev)}

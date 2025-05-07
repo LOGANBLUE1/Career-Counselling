@@ -1,28 +1,32 @@
 'use client';
 
 import {Button} from '@/components/ui/button';
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+
+
 
 const featuredServices = [
   {
     title: 'Personalized Mentorship',
     description: 'Connect with top mentors for personalized guidance and support.',
-    image: '/images/student.png',
+    image: '/images/student2.png',
     link: '/questionnaire',
   },
   {
     title: 'College Prediction',
     description: 'Predict potential college admissions based on your ranks.',
-    image: '/images/student2.png',
+    image: '/images/student1.png',
     link: '/college-prediction',
   },
   {
     title: 'Smart Study Schedule',
     description: 'Generate a personalized study schedule based on your learning style.',
-    image: '/images/student.png',
+    image: '/images/student2.png',
     link: '/study-schedule',
   },
   {
@@ -34,7 +38,7 @@ const featuredServices = [
   {
     title: 'Subscription Plans',
     description: 'Explore our subscription plans for JEE/NEET counseling.',
-    image: '/images/student.png',
+    image: '/images/student1.png',
     link: '/subscription',
   },
   {
@@ -56,7 +60,7 @@ const testimonials = [
     text: "The study materials and practice tests were invaluable in my NEET preparation. Highly recommend!",
     name: "Mike Johnson",
     title: "NEET Aspirant",
-    image: "/images/student.png",
+    image: "/images/student1.png",
   },
   {
     text: "I was lost before I found CareerCompass. Now I have a clear direction and the support I need.",
@@ -68,7 +72,7 @@ const testimonials = [
     text: "The personalized study schedule was a game-changer for me. I was able to manage my time effectively and improve my scores.",
     name: "David Lee",
     title: "GRE Aspirant",
-    image: "/images/student.png",
+    image: "/images/student1.png",
   },
 ];
 
@@ -77,16 +81,8 @@ const HomePage = () => {
   const sliderRef = useRef(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-
-  // const selector = useSelector((state) => {
-  //   console.log()
-  // });
-
-  // const dispatch = useDispatch();
-  // dispatch(setToken("Jaggu"))
-
-  // const { token } = useSelector((state) => state.auth);
-  // console.log("Token :: ", token);
+  const { token } = useSelector((state) => state.auth);
+  const navigate = useRouter();
 
 
   useEffect(() => {
@@ -132,24 +128,24 @@ const HomePage = () => {
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="text-left">
             <h1 className="text-5xl font-bold mb-4">
-              Unlock Your Potential with <span className="text-teal-500">CareerCompass</span>
+              Unlock Your Potential with <span className="text-teal-500">Career Compass</span>
             </h1>
             <p className="text-lg text-gray-600 mb-6">
               Your personalized guide to academic success and career exploration.
             </p>
-            <Button className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow">
+            <Button onClick={() => navigate.push("/services")} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow">
               Explore Services
             </Button>
           </div>
 
           <div className="relative flex justify-center">
             <Image
-              src="/images/student3.jpg"
+              src="/images/student.png"
               alt="Student Learning"
-              width={500}
-              height={600}
+              width={600}
+              height={500}
               className="rounded-lg shadow-xl"
-              style={{objectFit: 'cover'}}
+              // style={{objectFit: 'cover'}}
             />
             {/* <div className="absolute top-8 bg-white rounded-xl p-4 shadow-md flex items-center space-x-2">
               <GraduationCap className="text-orange-500"/>
@@ -191,7 +187,7 @@ const HomePage = () => {
                       alt={feature.title}
                       width={200}
                       height={200}
-                      className="rounded-md mb-4 "
+                      className="rounded-full mb-4 "
                     />
                     </div>
                   )}
@@ -262,8 +258,8 @@ const HomePage = () => {
           <p className="text-lg text-gray-600 mb-6">
             Join CareerCompass today and take the first step towards your dream career.
           </p>
-          <Button className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow">
-            Sign Up Now
+          <Button onClick={() => navigate.push((token ? "/services" : "/signup"))} className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow">
+            {token ? "Explore Our Services" : "Sign Up Now"}
           </Button>
         </section>
       </div>
@@ -272,3 +268,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

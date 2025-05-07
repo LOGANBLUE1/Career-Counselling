@@ -15,7 +15,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-[#1A237E] text-white py-12">
+    <footer className="bg-primary text-white py-6">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div>
@@ -58,25 +58,24 @@ const Footer = () => {
             <h6 className="font-semibold text-md mb-4">Other Links</h6>
             <ul className="text-sm">
               <li><a href="#" className="hover:underline">Mentorship Plan</a></li>
-              <li><a href="#" className="hover:underline">Our Mentor</a></li>
-              <li><a href="#" className="hover:underline">JEE Main Mentor</a></li>
-              <li><a href="#" className="hover:underline">JEE Advance Mentor</a></li>
+              {/* <li><a href="#" className="hover:underline">Our Mentor</a></li> */}
+              <li><a href="#" className="hover:underline">JEE Mentor</a></li>
               <li><a href="#" className="hover:underline">NEET Mentor</a></li>
               <li><a href="#" className="hover:underline">Become Mentor</a></li>
-              <li><a href="#" className="hover:underline">Take a Trial Session</a></li>
-              <li><a href="#" className="hover:underline">Toppers &amp; Student Community</a></li>
+              {/* <li><a href="#" className="hover:underline">Take a Trial Session</a></li> */}
+              {/* <li><a href="#" className="hover:underline">Toppers &amp; Student Community</a></li> */}
               <li><a href="/about" className="hover:underline">About Us</a></li>
-              <li><a href="#" className="hover:underline">Blogs</a></li>
-              <li><a href="#" className="hover:underline">Our Team</a></li>
-              <li><a href="#" className="hover:underline">FAQs</a></li>
-              <li><a href="#" className="hover:underline">Future Nurture</a></li>
+              <li><a href="/blogs" className="hover:underline">Blogs</a></li>
+              <li><a href="/our-team" className="hover:underline">Our Team</a></li>
+              <li><a href="/faq" className="hover:underline">FAQs</a></li>
+              {/* <li><a href="#" className="hover:underline">Future Nurture</a></li> */}
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
-              <li><a href="#" className="hover:underline">Terms and Conditions</a></li>
-              <li><a href="#" className="hover:underline">Privacy Policy</a></li>
+              <li><a href="/t&c" className="hover:underline">Terms and Conditions</a></li>
+              <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
             </ul>
           </div>
         </div>
-
+{/* 
         <div className="mt-6">
           <h6 className="font-semibold text-md mb-4">Follow Us:</h6>
           <div className="flex space-x-4">
@@ -96,9 +95,9 @@ const Footer = () => {
               <Linkedin className="h-6 w-6"/>
             </a>
           </div>
-        </div>
+        </div> */}
 
-        <hr className="my-6 border-border"/>
+        <hr className="my-4 border-border"/>
         <div className="text-center text-sm">
           &copy; {new Date().getFullYear()} CareerCompass by <a href="#" className="underline">EXPRTO TECHNOLOGIES PRIVATE LIMITED</a>. All rights reserved.
         </div>
